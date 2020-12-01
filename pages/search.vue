@@ -87,6 +87,7 @@ export default {
     border-radius: 20px;
     padding: 2.5rem;
     max-width: 450px;
+    border: 1px solid ghostwhite;
   }
 
   .result-container {
@@ -116,20 +117,6 @@ export default {
   }
 
   .searchTerm {
-    /* max-width: 200px;
-    display: flex;
-    margin: 0 auto;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    padding: 0.77rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    background: grey;
-    outline-color: grey;
-    border: grey;
-    text-align: center;
-    color: lightgrey;
-    border-radius: 5px; */
     height: 40px;
     display: inline-block;
     vertical-align: top;
@@ -147,15 +134,11 @@ export default {
     outline-color: #bdbdbd;
     border: 1px solid lightgrey;
     border-right: none;
+    font-size: large;
+    font-weight: 500;
   }
 
   .submit {
-    /* max-width: 200px;
-    padding: 0.5em;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    border-radius: 5px;
-    margin: 0 auto; */
     box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
@@ -170,6 +153,8 @@ export default {
     -webkit-transition: background-color .3s ease-in-out;
     transition: background-color .3s ease-in-out;
     color: white;
+    font-size: medium;
+    font-weight: 400;
   }
 
   audio {

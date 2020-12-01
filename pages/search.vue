@@ -3,6 +3,7 @@
 
 <template>
   <div>
+    <h1 class="header-search">Find your Rhythm</h1>
     <form action="#" @submit.prevent="onSubmit">
       <div class="input-container">
         <input class="searchTerm" placeholder="Enter search term..." v-model="searchTerm" />
@@ -93,6 +94,13 @@ export default {
     flex-direction: column;
     margin: 0 auto;
     max-width: 450px;
+  }
+
+  .header-search {
+    color: white;
+    font-size: 96px;
+    font-weight: 900;
+    text-align: center;
   }
 
   form {

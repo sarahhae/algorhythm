@@ -1,7 +1,11 @@
 // Line 8: attr for list of sounds with the key of sound id. On click, load sound id to audio player. Display sound name
-// Line 14: :ref="`player-${result.name}`" controls ? // vue-audio // vue-audio-visual
 
 <template>
+  <div>
+  <div class="nav-bar">
+    <NuxtLink class="route-s" to="/about">About</NuxtLink>
+    <NuxtLink class="route-s" to="/collection">Collection</NuxtLink>
+  </div>
   <div>
     <h1 class="header-search">Find your Rhythm</h1>
     <form action="#" @submit.prevent="onSubmit">
@@ -10,7 +14,7 @@
         <button class="submit">Submit</button>
       </div>
 
-      <div>
+      <div v-if="currentUri">
         <audio :src="currentUri" controls></audio>
       </div>
 
@@ -18,6 +22,7 @@
       <a class="result-item" v-for="(result, i) in this.resultList" :key="i" @click.prevent="loadSound(result.id)">{{ result.name }}</a>
     </div>
     </form>
+  </div>
   </div>
 </template>
 
@@ -59,15 +64,23 @@ export default {
     background: linear-gradient(180deg, rgba(199,69,252,0.40800070028011204) 0%, rgba(0,0,0,1) 34%); */
     background: rgb(112,112,112);
     background: linear-gradient(180deg, rgba(112,112,112,1) 0%, rgba(0,0,0,1) 19%);
+    min-height: 100vh;
   }
 
-  .route {
+  .nav-bar {
+    background: #7474ff;
+    padding: 23px;
+    min-height: 70px;
+    width: 100%;
+    text-align: right;
+  }
+
+  .route-s {
     text-decoration: none;
-    font-size: 110%;
-    font-weight: bold;
-    color: black;
-    padding: 1em;
-    margin-top: 1em;
+    font-size: 18px;
+    font-weight: 300;
+    color: white;
+    padding: 23px 1em;
   }
 
   .heading {

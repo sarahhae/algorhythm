@@ -3,6 +3,7 @@
     <div>
     <div class="navigation">
       <NuxtLink class="route" to="/about">About</NuxtLink>
+      <NuxtLink class="route" to="/search">Find your Rhythm</NuxtLink>
     </div>
 
     <div class="heading">

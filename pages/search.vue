@@ -3,6 +3,7 @@
 <template>
   <div>
   <div class="nav-bar">
+    <h2 class="name">Algo-Rhythm</h2>
     <NuxtLink class="route-s" to="/about">About</NuxtLink>
     <NuxtLink class="route-s" to="/collection">Collection</NuxtLink>
   </div>
@@ -73,6 +74,15 @@ export default {
     min-height: 70px;
     width: 100%;
     text-align: right;
+  }
+
+  .name {
+    text-align: left;
+    color: white;
+    font-size: 30px;
+    font-weight: 800;
+    width: 300px;
+    margin: 0;
   }
 
   .route-s {

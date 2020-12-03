@@ -23,7 +23,7 @@
         </div>
         <!-- Add sound button to save in to collections.vue page -->
         <a href="/collection">
-          <button v-if="currentUri" @click="addSound(soundData.data)">Add sound</button>
+          <button v-if="currentUri" @click="addSound(soundData.data)">+</button>
         </a>
         <!-- Search results -->
         <div class="result-container">
@@ -34,6 +34,7 @@
           :key="i"
           @click.prevent="loadSound(result.id)">
           {{ result.name }}
+          <button @click="addSound(soundData.data)">Add sound</button>
         </a>
       </div>
     </form>
@@ -116,6 +117,7 @@ h1 {
 }
 
 .result-container {
+  margin: 4rem 0;
   display: grid;
   justify-content: center;
   grid-template-rows: 5fr 5fr 5fr;

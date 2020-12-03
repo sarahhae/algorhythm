@@ -3,8 +3,8 @@
     <!-- Navigation  -->
     <div class="nav-bar">
       <div class="vinyl">
-      <img src="../assets/vinyl.svg.png" alt="vinyl" height="100px">
-      <NuxtLink class="name" to="/">Algo Rhythm</NuxtLink>
+        <img src="../assets/vinyl.svg.png" alt="vinyl" height="100px">
+        <NuxtLink class="name" to="/">Algo Rhythm</NuxtLink>
       </div>
       <NuxtLink class="route" to="/about">About</NuxtLink>
       <NuxtLink class="route" to="/search">Search</NuxtLink>
@@ -21,7 +21,7 @@
             <th></th>
           </tr>
         </thead>
-
+        
         <tbody class="table-container">
           <tr v-for="(sound, i) in sounds" :key="i">
             <!-- List of sound name -->
@@ -74,78 +74,78 @@ export default {
   }
   </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
-.vinyl {
-  display: flex;
-}
+  .vinyl {
+    display: flex;
+  }
 
-img {
-  margin: 0.8rem;
-}
+  img {
+    margin: 0.8rem;
+  }
 
-.name {
-  font-family: 'Monoton', cursive;
-  text-align: left;
-  color: white;
-  font-size: 37px;
-  font-weight: 800;
-  width: 300px;
-  margin-left: 0.3em;
-  margin-top: 7px;
-}
+  .name {
+    font-family: 'Monoton', cursive;
+    text-align: left;
+    color: white;
+    font-size: 37px;
+    font-weight: 800;
+    width: 300px;
+    margin-left: 0.3em;
+    margin-top: 7px;
+  }
 
-.route {
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 400;
-  color: white;
-  padding: 23px 1em;
-}
+  .route {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    padding: 23px 1em;
+  }
 
-.heading {
-  margin: 0 auto;
-}
+  .heading {
+    margin: 0 auto;
+  }
 
-h1 {
-  padding: 1em;
-  font-size: 400%;
-}
+  h1 {
+    padding: 1em;
+    font-size: 400%;
+  }
 
-.soundList {
-  margin: 0 auto;
-  width: 700px;
-  display: block;
-  margin-bottom: 50px;
-}
+  .soundList {
+    margin: 0 auto;
+    width: 700px;
+    display: block;
+    margin-bottom: 50px;
+  }
 
-td, th {
-  color: white;
-  padding: 1rem;
-}
+  td, th {
+    color: white;
+    padding: 1rem;
+  }
 
-td {
-  background: #3f3f3f;
-}
+  td {
+    background: #3f3f3f;
+  }
 
-thead {
-  background: #7474ff;
-}
+  thead {
+    background: #7474ff;
+  }
 
-.header-search {
-  color: white;
-  font-size: 96px;
-  font-weight: 900;
-  text-align: center;
-}
+  .header-search {
+    color: white;
+    font-size: 96px;
+    font-weight: 900;
+    text-align: center;
+  }
 
-audio {
-  margin: 0 auto;
-  margin-top: 3rem;
-  margin-bottom: 2rem;
-  display: grid;
-  outline: none;
-}
+  audio {
+    margin: 0 auto;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    display: grid;
+    outline: none;
+  }
 
-</style>
+  </style>

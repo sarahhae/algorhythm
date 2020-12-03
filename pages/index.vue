@@ -83,14 +83,6 @@ h3.sub-heading {
   width: 471px;
 }
 
-.route {
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 400;
-  color: white;
-  padding: 23px 1em;
-}
-
 .heading {
   margin: 0 auto;
 }

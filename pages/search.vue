@@ -147,7 +147,7 @@ export default {
       border-radius: 10px;
     }
 
-    a:active {
+    a.result-item:active {
       background: limegreen;
     }
 

@@ -44,7 +44,7 @@ Straightforward design yet organised design layout. I went for simplicity this t
 
 ## Future Improvements
 
-This has become an ambitious project where I would love to carry on with. Adding features like visual sound waves using bpm/tempo, more than one collection list, uploading my own mix, and of course the user-experience and user-interface needing improvements.
+This has become an ambitious project where I would love to carry on with. Adding features like visual sound waves using bpm/tempo, authentication, more than one collection list, uploading my own mix, improved page transitions and of course the user-experience and user-interface needing improvements.
 
 ## Live Site
 

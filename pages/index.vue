@@ -1,13 +1,12 @@
 <template>
   <div class="container">
-    <div class="nav-bar">
-      <NuxtLink class="route" to="/about">About</NuxtLink>
-      <NuxtLink class="route" to="/search">Find your Rhythm</NuxtLink>
-    </div>
-
     <div class="heading">
       <h1 class="name">Algo Rhythm</h1>
       <h3 class="sub-heading">Find and discover beats for your next music</h3>
+    </div>
+    <div class="nav-bar">
+      <NuxtLink class="route" to="/about">About</NuxtLink>
+      <NuxtLink class="route" to="/search">Find Your Rhythm</NuxtLink>
     </div>
   </div>
 </template>

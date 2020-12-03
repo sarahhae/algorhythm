@@ -13,34 +13,36 @@
       <form action="#" @submit.prevent="onSubmit">
         <div class="input-container">
           <input class="searchTerm"
-            placeholder="Enter search term..."
-            v-model="searchTerm" />
+          placeholder="Enter search term..."
+          v-model="searchTerm" />
           <button class="submit">Submit</button>
         </div>
-
         <!-- audio player -->
         <div v-if="currentUri">
           <audio :src="currentUri" controls></audio>
         </div>
-
+        <!-- Add sound button to save in to collections.vue page -->
+        <a href="/collection">
+          <button v-if="currentUri" @click="addSound(soundData.data)">Add sound</button>
+        </a>
         <!-- Search results -->
         <div class="result-container">
           <!-- attr for list of sounds with the key of sound id. On click,
           load sound id to audio player. Display sound name -->
           <a class="result-item"
-            v-for="(result, i) in this.resultList"
-            :key="i"
-            @click.prevent="loadSound(result.id)">
-            {{ result.name }}
-          </a>
-
-        </div>
-      </form>
-    </div>
+          v-for="(result, i) in this.resultList"
+          :key="i"
+          @click.prevent="loadSound(result.id)">
+          {{ result.name }}
+        </a>
+      </div>
+    </form>
   </div>
+</div>
 </template>
 
 <script>
+import Vue from 'vue';
 const axios = require('axios'); // create variable for axios. require = import
 const apiKey = 'P8qswr1eFfh1Zv1we6eg3ZwbaDXlxLlo0CqAWSfK'; // create apikey variable
 
@@ -50,39 +52,42 @@ export default {
     return {
       searchTerm: '', // Search input for sound
       resultList: [], // An array of sounds
-      currentUri: '' // Current sound to play on audio
+      currentUri: '', // Current sound to play on audio
+      soundData: {}
     }
   },
   methods: {
     loadSound(id) {
       axios.get(`https://freesound.org/apiv2/sounds/${ id }/?token=${ apiKey }`)
         .then(( responseData ) => {
-        console.log(responseData.data);
-        this.currentUri = responseData.data.download
-      })
-    },
-    onSubmit() {
-      axios.get(`https://freesound.org/apiv2/search/text/?query=${ this.searchTerm }&token=${ apiKey }`)
-        .then(( responseData ) => {
-        console.log('just the array to list over', responseData.data.results );
-        console.log('full response from api:', responseData);
-        this.resultList = responseData.data.results
-      });
+          console.log(responseData.data);
+          this.currentUri = responseData.data.download;
+          this.soundData = responseData.data;
+          console.log(JSON.stringify(responseData.data));
+        })
+      },
+      onSubmit() {
+        axios.get(`https://freesound.org/apiv2/search/text/?query=${ this.searchTerm }&token=${ apiKey }`)
+          .then(( responseData ) => {
+            console.log('just the array to list over', responseData.data.results );
+            console.log('full response from api:', responseData);
+            this.resultList = responseData.data.results
+          })
+        },
+        addSound() {
+        // get existing sounds
+        const sounds = JSON.parse(localStorage.getItem('collection')) || [];
+        // add new sound
+        sounds.push(this.soundData);
+        // save to localStorage
+        localStorage.setItem('collection', JSON.stringify(sounds));
+        }
+      }
     }
-  }
-}
-</script>
+      </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
-
-body {
-  /* background: rgb(199,69,252);
-  background: linear-gradient(180deg, rgba(199,69,252,0.40800070028011204) 0%, rgba(0,0,0,1) 34%); */
-  background: rgb(112,112,112);
-  background: linear-gradient(180deg, rgba(112,112,112,1) 0%, rgba(0,0,0,1) 19%);
-  min-height: 100vh;
-}
 
 .nav-bar {
   background: #7474ff;
@@ -101,14 +106,6 @@ body {
   width: 300px;
 }
 
-.route {
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 400;
-  color: white;
-  padding: 23px 1em;
-}
-
 .heading {
   margin: 0 auto;
 }
@@ -118,21 +115,21 @@ h1 {
   font-size: 400%;
 }
 
+.result-container {
+  display: grid;
+  justify-content: center;
+  grid-template-rows: 5fr 5fr 5fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
 .result-item {
   margin: 1rem;
   background: black;
   color: ghostwhite;
-  border-radius: 20px;
   padding: 2.5rem;
-  max-width: 450px;
   border: 1px solid ghostwhite;
-}
-
-.result-container {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  max-width: 450px;
+  max-width: 250px;
+  max-height: 150px;
 }
 
 .header-search {
@@ -144,7 +141,7 @@ h1 {
 
 form {
   margin: 0 auto;
-  max-width: 450px;
+  max-width: 960px;
 }
 
 .input-container {

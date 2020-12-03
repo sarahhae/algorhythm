@@ -34,14 +34,6 @@
 </template>
 
 <style>
-  .route {
-    text-decoration: none;
-    font-size: 110%;
-    font-weight: bold;
-    color: black;
-    padding: 1em;
-    margin-top: 1em;
-  }
 
   .heading {
     margin: 0 auto;

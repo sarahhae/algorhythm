@@ -1,25 +1,47 @@
-<Template>
+<template>
   <div>
     <!-- Navigation  -->
     <div class="nav-bar">
       <h2 class="name">Algo Rhythm</h2>
-      <NuxtLink class="route-s" to="/about">About</NuxtLink>
-      <NuxtLink class="route-s" to="/search">Search</NuxtLink>
+      <NuxtLink class="route" to="/about">About</NuxtLink>
+      <NuxtLink class="route" to="/search">Search</NuxtLink>
+    </div>
+    <!-- Display list of sounds added to collections -->
+    <!-- Add remove sound from list button -->
+    <div>
+      <h1>Sound Collection</h1>
+      <table class="soundList">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Sound</th>
+            <th>BPM</th>
+            <th></th>
+          </tr>
+        </thead>
+        <!-- <button @click="removeSound(result.name)">Remove</button> -->
+
+        <tbody class="table-container">
+          <tr v-for="(sound, i) in sounds" :key="i">
+            <!-- List of sound name -->
+            <td>{{ sound.name }}</td>
+            <td>
+              <div v-if="sound.download">
+                <audio :src="sound.download" controls></audio>
+              </div>
+            </td>
+            <!-- List of sound bpm (if available)-->
+            <td width="75" class="center aligned">
+              120bpm
+            </td>
+            <td><button>Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <h2>Collection of Sounds</h2>
-    <div v-for="(name, s) in collection">
-      <p>
-        <span class="collection">{{ result.name }}</span>
-        <button @click="removeSound(n)">Remove</button>
-      </p>
-    </div>
-    
-    <p>
-      <button @click="addSound">+</button>
-    </p>
   </div>
-</Template>
+</template>
 
 <script>
 import Vue from 'vue';
@@ -28,41 +50,27 @@ const axios = require('axios'); // create variable for axios. require = import
 const apiKey = 'P8qswr1eFfh1Zv1we6eg3ZwbaDXlxLlo0CqAWSfK'; // create apikey variable
 
 export default {
-  // const collection = new Vue({
-  el: '#collection',
-  data: {
-    sounds: [],
-    newSound: null
+  data() {
+    return {
+      sounds: []
+    }
   },
   mounted() {
-    if (localStorage.getItem('sound')) {
-      try {
-        this.sounds = JSON.parse(localStorage.getItem('sound'));
-      } catch(e) {
-        localStorage.removeItem('sound');
-      }
-    }
+    const sounds = JSON.parse(localStorage.getItem('collection')) || [];
+    this.sounds = sounds
   },
   methods: {
-    addSound() {
-      if (!this.newSound) {
-        return;
-      }
-      this.sounds.push(this.newSound);
-      this.newSound = '';
-      this.saveSounds();
-    },
-    removeSound(x) {
-      this.sounds.splice(x, 1);
-      this.saveSounds();
-    },
-    saveSounds() {
-      const parsed = JSON.stringify(this.sounds);
-      localStorage.setItem('sounds', parsed);
+    loadSound(sound) {
+      axios.get(`https://freesound.org/apiv2/sounds/${ sounds.id }/?token=${ apiKey }`)
+        .then(( responseData ) => {
+          console.log(responseData.data);
+          this.sounds = responseData.data;
+          console.log(JSON.stringify(responseData.data));
+        })
+      },
     }
   }
-}
-</script>
+  </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
@@ -75,14 +83,6 @@ body {
   min-height: 100vh;
 }
 
-.nav-bar {
-  background: #7474ff;
-  padding: 23px;
-  min-height: 70px;
-  width: 100%;
-  text-align: right;
-}
-
 .name {
   font-family: 'Monoton', cursive;
   text-align: left;
@@ -92,7 +92,7 @@ body {
   width: 300px;
 }
 
-.route-s {
+.route {
   text-decoration: none;
   font-size: 20px;
   font-weight: 400;
@@ -109,21 +109,19 @@ h1 {
   font-size: 400%;
 }
 
-.result-item {
-  margin: 1rem;
-  background: black;
-  color: ghostwhite;
-  border-radius: 20px;
-  padding: 2.5rem;
-  max-width: 450px;
-  border: 1px solid ghostwhite;
+.soundList {
+  margin: 0 auto;
+  width: 700px;
+  display: block;
 }
 
-.result-container {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  max-width: 450px;
+td, th {
+  color: white;
+  padding: 1rem;
+}
+
+thead {
+  background: #7474ff;
 }
 
 .header-search {
@@ -133,57 +131,11 @@ h1 {
   text-align: center;
 }
 
-form {
-  margin: 0 auto;
-  max-width: 450px;
-}
-
 .input-container {
   display: flex;
   max-width: 350px;
   margin: 0 auto;
   margin-top: 2rem;
-}
-
-.searchTerm {
-  height: 40px;
-  display: inline-block;
-  vertical-align: top;
-  box-sizing: border-box;
-  border: 3px solid transparent;
-  -webkit-transition: border .2s ease-in-out;
-  transition: border .2s ease-in-out;
-  width: calc(100% - 40px);
-  padding: 7px;
-  border-radius: 5px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  color: white;
-  background: #bdbdbd;
-  outline-color: #bdbdbd;
-  border: 1px solid lightgrey;
-  border-right: none;
-  font-size: large;
-  font-weight: 500;
-}
-
-.submit {
-  box-sizing: border-box;
-  display: inline-block;
-  vertical-align: top;
-  border-radius: 5px;
-  height: 40px;
-  width: 95px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  background-color: #7474ff;
-  outline-color: #7474ff;
-  border: #7474ff;
-  -webkit-transition: background-color .3s ease-in-out;
-  transition: background-color .3s ease-in-out;
-  color: white;
-  font-size: medium;
-  font-weight: 400;
 }
 
 audio {

@@ -2,7 +2,10 @@
   <div>
     <!-- Navigation  -->
     <div class="nav-bar">
-      <h2 class="name">Algo Rhythm</h2>
+      <div class="vinyl">
+      <img src="../assets/vinyl.svg.png" alt="vinyl" height="100px">
+      <NuxtLink class="name" to="/">Algo Rhythm</NuxtLink>
+      </div>
       <NuxtLink class="route" to="/about">About</NuxtLink>
       <NuxtLink class="route" to="/collection">Collection</NuxtLink>
     </div>
@@ -13,33 +16,34 @@
       <form action="#" @submit.prevent="onSubmit">
         <div class="input-container">
           <input class="searchTerm"
-          placeholder="Enter search term..."
+          placeholder="Search sound..."
           v-model="searchTerm" />
           <button class="submit">Submit</button>
         </div>
-        <!-- audio player -->
-        <div v-if="currentUri">
-          <audio :src="currentUri" controls></audio>
-        </div>
-        <!-- Add sound button to save in to collections.vue page -->
-        <a href="/collection">
-          <button v-if="currentUri" @click="addSound(soundData.data)">+</button>
-        </a>
-        <!-- Search results -->
-        <div class="result-container">
-          <!-- attr for list of sounds with the key of sound id. On click,
-          load sound id to audio player. Display sound name -->
-          <a class="result-item"
-          v-for="(result, i) in this.resultList"
-          :key="i"
-          @click.prevent="loadSound(result.id)">
-          {{ result.name }}
-          <button @click="addSound(soundData.data)">Add sound</button>
-        </a>
+      </form>
+      <div v-if="currentUri">
+      <audio :src="currentUri" controls></audio>
       </div>
-    </form>
+      <!-- display resultList, audio and button -->
+      <!-- button: add sound to sound collection -->
+      <div class="result-container">
+        <a class="result-item"
+        v-for="(result, i) in this.resultList"
+        :key="i"
+        @click.prevent="loadSound(result.id)">
+        {{ result.name }}
+
+          <div href="/collection">
+
+            <button @click="addSound(soundData.data)">+</button>
+          </div>
+        </a>
+        </div>
+
+
+
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -82,6 +86,7 @@ export default {
         sounds.push(this.soundData);
         // save to localStorage
         localStorage.setItem('collection', JSON.stringify(sounds));
+        // add sound to collections = @click-="addToCollection"
         }
       }
     }
@@ -89,6 +94,11 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+body {
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 55%, rgba(238,238,238,1) 100%);
+}
 
 .nav-bar {
   background: #7474ff;
@@ -98,13 +108,24 @@ export default {
   text-align: right;
 }
 
+.vinyl {
+  display: flex;
+}
+
+img {
+  margin: 0.8rem;
+}
+
 .name {
   font-family: 'Monoton', cursive;
   text-align: left;
   color: white;
-  font-size: 40px;
+  font-size: 37px;
   font-weight: 800;
   width: 300px;
+  margin-left: 0.3em;
+  margin-top: 7px;
+  text-decoration: none;
 }
 
 .heading {
@@ -117,7 +138,6 @@ h1 {
 }
 
 .result-container {
-  margin: 4rem 0;
   display: grid;
   justify-content: center;
   grid-template-rows: 5fr 5fr 5fr;
@@ -126,12 +146,14 @@ h1 {
 
 .result-item {
   margin: 1rem;
-  background: black;
+  background: #3f3f3f;
   color: ghostwhite;
   padding: 2.5rem;
-  border: 1px solid ghostwhite;
-  max-width: 250px;
-  max-height: 150px;
+  border-radius: 10px;
+}
+
+.result-item:active {
+  background: limegreen;
 }
 
 .header-search {
@@ -149,8 +171,7 @@ form {
 .input-container {
   display: flex;
   max-width: 350px;
-  margin: 0 auto;
-  margin-top: 2rem;
+  margin: 2rem auto;
 }
 
 .searchTerm {

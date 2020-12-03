@@ -1,10 +1,13 @@
 <template>
   <div class="container">
     <div class="heading">
-      <h1 class="name">Algo Rhythm</h1>
-      <h3 class="sub-heading">Find and discover beats for your next music</h3>
+      <div class="index-page-header">
+      <img class="vinyl-white" src="../assets/vinyl.svg.png" alt="vinyl" height="100px">
+      <h2 class="name">Algo Rhythm</h2>
+      </div>
+      <h3 class="sub-heading">Discover beats and sounds for your next music</h3>
     </div>
-    <div class="nav-bar">
+    <div class="index-nav-bar">
       <NuxtLink class="route" to="/about">About</NuxtLink>
       <NuxtLink class="route" to="/search">Find Your Rhythm</NuxtLink>
     </div>
@@ -19,6 +22,24 @@ export default {
 </script>
 
 <style>
+body {
+  /* background: rgb(199,69,252);
+  background: linear-gradient(180deg, rgba(199,69,252,0.40800070028011204) 0%, rgba(0,0,0,1) 34%); */
+  background: rgb(112,112,112);
+  background: linear-gradient(180deg, rgba(112,112,112,1) 0%, rgba(0,0,0,1) 19%);
+  min-height: 100vh;
+}
+
+.vinyl-white {
+  filter: invert(1);
+}
+
+.index-page-header {
+  display: flex;
+  margin-left: 115px;
+  margin-bottom: 20px;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -28,12 +49,13 @@ export default {
   text-align: center;
 }
 
-.nav-bar {
+.index-nav-bar {
   background: #7474ff;
   padding: 23px;
   min-height: 70px;
   width: 100%;
   text-align: right;
+  border-radius: 50px 0px 0 50px;
 }
 
 .route {
@@ -54,18 +76,19 @@ export default {
 }
 
 h3.sub-heading {
-  font-weight: 400;
+  font-weight: 200;
   margin: 10px;
-  padding-left: 30px;
+  text-align: left;
+  margin-left: 70px;
+  width: 471px;
 }
 
 .route {
   text-decoration: none;
-  font-size: 110%;
-  font-weight: bold;
-  color: black;
-  padding: 1em;
-  margin-top: 1em;
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
+  padding: 23px 1em;
 }
 
 .heading {
@@ -75,6 +98,5 @@ h3.sub-heading {
 h1 {
   padding: 1em;
   font-size: 400%;
-  color: #5b3cc4;
 }
 </style>

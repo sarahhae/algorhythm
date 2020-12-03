@@ -2,24 +2,25 @@
   <div>
     <!-- Navigation  -->
     <div class="nav-bar">
-      <h2 class="name">Algo Rhythm</h2>
+      <div class="vinyl">
+      <img src="../assets/vinyl.svg.png" alt="vinyl" height="100px">
+      <NuxtLink class="name" to="/">Algo Rhythm</NuxtLink>
+      </div>
       <NuxtLink class="route" to="/about">About</NuxtLink>
       <NuxtLink class="route" to="/search">Search</NuxtLink>
     </div>
     <!-- Display list of sounds added to collections -->
-    <!-- Add remove sound from list button -->
     <div>
       <h1>Sound Collection</h1>
       <table class="soundList">
         <thead>
           <tr>
             <th>Title</th>
-            <th>Sound</th>
+            <th>Audio</th>
             <th>BPM</th>
             <th></th>
           </tr>
         </thead>
-        <!-- <button @click="removeSound(result.name)">Remove</button> -->
 
         <tbody class="table-container">
           <tr v-for="(sound, i) in sounds" :key="i">
@@ -30,6 +31,7 @@
                 <audio :src="sound.download" controls></audio>
               </div>
             </td>
+
             <!-- List of sound bpm (if available)-->
             <td width="75" class="center aligned">
               120bpm
@@ -75,21 +77,23 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
-body {
-  /* background: rgb(199,69,252);
-  background: linear-gradient(180deg, rgba(199,69,252,0.40800070028011204) 0%, rgba(0,0,0,1) 34%); */
-  background: rgb(112,112,112);
-  background: linear-gradient(180deg, rgba(112,112,112,1) 0%, rgba(0,0,0,1) 19%);
-  min-height: 100vh;
+.vinyl {
+  display: flex;
+}
+
+img {
+  margin: 0.8rem;
 }
 
 .name {
   font-family: 'Monoton', cursive;
   text-align: left;
   color: white;
-  font-size: 40px;
+  font-size: 37px;
   font-weight: 800;
   width: 300px;
+  margin-left: 0.3em;
+  margin-top: 7px;
 }
 
 .route {
@@ -113,11 +117,16 @@ h1 {
   margin: 0 auto;
   width: 700px;
   display: block;
+  margin-bottom: 50px;
 }
 
 td, th {
   color: white;
   padding: 1rem;
+}
+
+td {
+  background: #3f3f3f;
 }
 
 thead {
@@ -129,13 +138,6 @@ thead {
   font-size: 96px;
   font-weight: 900;
   text-align: center;
-}
-
-.input-container {
-  display: flex;
-  max-width: 350px;
-  margin: 0 auto;
-  margin-top: 2rem;
 }
 
 audio {

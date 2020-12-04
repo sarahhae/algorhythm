@@ -6,6 +6,7 @@
         <img src="../assets/vinyl.svg.png" alt="vinyl" height="100px">
         <NuxtLink class="name" to="/">Algo Rhythm</NuxtLink>
       </div>
+      <!-- NuxtLink = routes in nuxtjs -->
       <NuxtLink class="route" to="/about">About</NuxtLink>
       <NuxtLink class="route" to="/collection">Collection</NuxtLink>
     </div>
